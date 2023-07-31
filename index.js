@@ -1,6 +1,8 @@
+require('dotenv').config()
 const express = require('express');
 const socketio = require('socket.io');
 const path = require('path');
+
 
 const app = express();
 
@@ -10,7 +12,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'public', 'index.html'));
 });
 
-const server = app.listen(1337, () => {
+const server = app.listen(process.env.PORT, () => {
     console.log('Server running!')
 });
 
@@ -19,6 +21,7 @@ const io = socketio(server,
         cors: {
           origin: "*",
           methods: ["GET", "POST","PUT","DELETE"]
+          
         }
  
     })
